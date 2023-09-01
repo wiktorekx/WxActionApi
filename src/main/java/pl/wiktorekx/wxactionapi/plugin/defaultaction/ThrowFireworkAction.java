@@ -8,6 +8,7 @@ import org.bukkit.inventory.meta.FireworkMeta;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import pl.wiktorekx.wxactionapi.api.Action;
+import pl.wiktorekx.wxactionapi.api.exception.ActionException;
 
 public class ThrowFireworkAction implements Action {
     @Override
@@ -17,7 +18,8 @@ public class ThrowFireworkAction implements Action {
     }
 
     @Override
-    public void onAction(@Nullable Player player, @NotNull String[] args) {
+    public void onAction(@Nullable Player player, @NotNull String[] args) throws ActionException {
+        if(player == null) throw new ActionException("This action require player");
         Firework firework = player.getWorld().spawn(player.getLocation(), Firework.class);
         FireworkMeta fireworkMeta = firework.getFireworkMeta();
         fireworkMeta.addEffect(

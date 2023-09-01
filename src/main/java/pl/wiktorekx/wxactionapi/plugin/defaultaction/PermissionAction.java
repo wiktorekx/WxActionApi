@@ -24,10 +24,9 @@ public class PermissionAction implements Action {
 
     @Override
     public void onAction(@Nullable Player player, @NotNull String[] args) throws ActionException {
-        if(args.length > 1) {
-            if(player.hasPermission(args[0])) {
-                actionService.execAction(player, Arrays.copyOfRange(args, 1, args.length));
-            }
-        }
+        if(player == null) throw new ActionException("This action require player");
+        if(args.length <= 1) throw new ActionException("Require 2 arguments: permission and action");
+        if(player.hasPermission(args[0]))
+            actionService.execAction(player, Arrays.copyOfRange(args, 1, args.length));
     }
 }

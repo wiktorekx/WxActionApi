@@ -16,15 +16,18 @@ public class PlaySoundAction implements Action {
 
     @Override
     public void onAction(@Nullable Player player, @NotNull String[] args) throws ActionException {
+        if (player == null) throw new ActionException("This action require player");
+        if (args.length == 0) throw new ActionException("Require 1 argument: sound");
+        Sound sound;
         try {
-            Sound sound = Sound.valueOf(args[0].toUpperCase());
-            float volume = 1;
-            float pitch = 1;
-            if(args.length > 1) volume = Float.parseFloat(args[1]);
-            if(args.length > 2) pitch = Float.parseFloat(args[2]);
-            player.playSound(player.getLocation(), sound, volume, pitch);
-        } catch (Exception e){
-            throw new ActionException("", e);
+            sound = Sound.valueOf(args[0].toUpperCase());
+        } catch (IllegalArgumentException e) {
+            throw new ActionException("Not found sound " + args[0]);
         }
+        float volume = 1;
+        float pitch = 1;
+        if (args.length > 1) volume = Float.parseFloat(args[1]);
+        if (args.length > 2) pitch = Float.parseFloat(args[2]);
+        player.playSound(player.getLocation(), sound, volume, pitch);
     }
 }

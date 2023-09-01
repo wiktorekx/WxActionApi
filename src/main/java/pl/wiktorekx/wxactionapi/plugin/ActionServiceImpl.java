@@ -54,6 +54,10 @@ public class ActionServiceImpl implements ActionService {
         String name = request.getAction().toLowerCase().replace(" ", "");
         Action action = getAction(name);
         if (action == null) throw new NoFoundActionException(name);
-        action.onAction(request.getPlayer(), request.getArgs());
+        try {
+            action.onAction(request.getPlayer(), request.getArgs());
+        } catch (Throwable e) {
+            throw new ActionException("Error in " + name + " action", e);
+        }
     }
 }

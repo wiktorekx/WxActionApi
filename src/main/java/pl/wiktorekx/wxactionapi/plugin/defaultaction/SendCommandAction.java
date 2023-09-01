@@ -27,23 +27,14 @@ public class SendCommandAction implements Action {
 
     @Override
     public void onAction(@Nullable Player player, @NotNull String[] args) throws ActionException {
-        if(args.length > 1){
-            String sender = args[0];
-            CommandSender commandSender = player;
-            if(sender.equalsIgnoreCase("console")){
-                commandSender = Bukkit.getConsoleSender();
-            }
-            boolean op = sender.equalsIgnoreCase("op");
-            boolean isOp = player.isOp();
-            player.setOp(op);
-            try {
-                Bukkit.dispatchCommand(commandSender, placeholderService.replace(player, String.join(" ", Arrays.copyOfRange(args, 1, args.length))));
-            } catch (Throwable e){
-                throw new ActionException("", e);
-            }
-            if(op && !isOp) {
-                player.setOp(false);
-            }
+        if (args.length <= 1) throw new ActionException("Require 2 arguments: sender, command");
+        String sender = args[0];
+        CommandSender commandSender = player;
+        if (sender.equalsIgnoreCase("console")) {
+            commandSender = Bukkit.getConsoleSender();
         }
+        if(commandSender == null) throw new ActionException("Sender is null");
+        String command = String.join(" ", Arrays.copyOfRange(args, 1, args.length));
+        Bukkit.dispatchCommand(commandSender, player != null ? placeholderService.replace(player, command) : command);
     }
 }

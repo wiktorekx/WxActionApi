@@ -26,11 +26,12 @@ public class ActionsAction implements Action {
     @Override
     public void onAction(@Nullable Player player, @NotNull String[] args) throws ActionException {
         List<String> currentAction = new ArrayList<>();
-        for(String line : args) {
+        for(int i = 0; i < args.length; i++) {
+            String line = args[i];
             String findLine = line.replace(" ", "");
             if(findLine.isEmpty()) continue;
             if(findLine.equals(";")) {
-                execAction(player, currentAction);
+                execAction(player, currentAction, i);
                 currentAction.clear();
                 continue;
             }
@@ -38,11 +39,16 @@ public class ActionsAction implements Action {
                 line = line.substring(1);
             currentAction.add(line);
         }
-        execAction(player, currentAction);
+        execAction(player, currentAction, args.length);
     }
 
-    private void execAction(Player player, List<String> action) throws ActionException {
-        if(!action.isEmpty())
-            actionService.execAction(player, action.toArray(new String[0]));
+    private void execAction(Player player, List<String> action, int n) throws ActionException {
+        if(!action.isEmpty()) {
+            try {
+                actionService.execAction(player, action.toArray(new String[0]));
+            } catch (ActionException actionException){
+                throw new ActionException("Error in " + n, actionException);
+            }
+        }
     }
 }

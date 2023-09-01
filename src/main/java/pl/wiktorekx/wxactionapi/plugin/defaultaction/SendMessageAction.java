@@ -1,9 +1,11 @@
 package pl.wiktorekx.wxactionapi.plugin.defaultaction;
 
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import pl.wiktorekx.wxactionapi.api.Action;
+import pl.wiktorekx.wxactionapi.api.exception.ActionException;
 import pl.wiktorekx.wxactionapi.plugin.placeholder.PlaceholderService;
 import pl.wiktorekx.wxactionapi.plugin.utils.ChatUtils;
 
@@ -24,19 +26,27 @@ public class SendMessageAction implements Action {
     }
 
     @Override
-    public void onAction(@Nullable Player player, @NotNull String[] args) {
+    public void onAction(@Nullable Player player, @NotNull String[] args) throws ActionException {
+        if(player == null) throw new ActionException("This action require player");
+        if (args.length == 0) throw new ActionException("Require 1 argument: message");
         boolean newLine = false;
-        if(args.length > 0) {
-            String firstLine = args[0];
-            if(firstLine.startsWith("&nl")) {
-                newLine = true;
-                args[0] = firstLine.substring(3);
-            }
-            if(newLine) {
-                Arrays.stream(args).forEach(line -> player.sendMessage(placeholderService.replace(player, ChatUtils.color(line))));
-            } else {
-                player.sendMessage(placeholderService.replace(player, ChatUtils.color(String.join(" ", args))));
-            }
+        String firstLine = args[0];
+        if (firstLine.startsWith("&nl")) {
+            newLine = true;
+            args[0] = firstLine.substring(3);
+        }
+        if (newLine) {
+            Arrays.stream(args).forEach(line -> sendMessage(player, line));
+        } else {
+            sendMessage(player, String.join(" ", args));
+        }
+    }
+
+    private void sendMessage(@Nullable Player player, String message) {
+        if(player == null) {
+            Bukkit.broadcastMessage(ChatUtils.color(message));
+        } else {
+            player.sendMessage(placeholderService.replace(player, ChatUtils.color(message)));
         }
     }
 }
