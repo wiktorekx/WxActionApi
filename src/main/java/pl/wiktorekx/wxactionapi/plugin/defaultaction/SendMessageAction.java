@@ -27,7 +27,6 @@ public class SendMessageAction implements Action {
 
     @Override
     public void onAction(@Nullable Player player, @NotNull String[] args) throws ActionException {
-        if(player == null) throw new ActionException("This action require player");
         if (args.length == 0) throw new ActionException("Require 1 argument: message");
         boolean newLine = false;
         String firstLine = args[0];
