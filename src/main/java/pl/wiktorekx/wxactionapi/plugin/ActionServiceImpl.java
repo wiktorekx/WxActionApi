@@ -1,6 +1,8 @@
 package pl.wiktorekx.wxactionapi.plugin;
 
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import pl.wiktorekx.wxactionapi.api.Action;
 import pl.wiktorekx.wxactionapi.api.ActionRequest;
 import pl.wiktorekx.wxactionapi.api.ActionService;
@@ -15,44 +17,43 @@ public class ActionServiceImpl implements ActionService {
     private final Map<String, Action> actionMap = new HashMap<>();
 
     @Override
-    public void registerAction(Action action){
+    public void registerAction(@NotNull Action action){
+        Objects.requireNonNull(action);
+        Objects.requireNonNull(action.getName());
         actionMap.put(action.getName().toLowerCase().replace(" ", ""), action);
     }
 
     @Override
-    public void unregisterAction(String name){
-        actionMap.remove(name);
+    public void unregisterAction(@NotNull String name){
+        actionMap.remove(Objects.requireNonNull(name));
     }
 
     @Override
-    public Action getAction(String name) {
-        return actionMap.get(name);
+    @Nullable
+    public Action getAction(@NotNull String name) {
+        return actionMap.get(Objects.requireNonNull(name));
     }
 
     @Override
-    public void execAction(Player player, String args) throws ActionException {
-        Objects.requireNonNull(player);
-        execAction(ActionRequest.createActionRequest(player, args));
+    public void execAction(@Nullable Player player, @NotNull String args) throws ActionException {
+        execAction(ActionRequest.createActionRequest(player, Objects.requireNonNull(args)));
     }
 
     @Override
-    public void execAction(Player player, String[] args) throws ActionException {
-        Objects.requireNonNull(player);
-        execAction(ActionRequest.createActionRequest(player, args));
+    public void execAction(@Nullable Player player, @NotNull String[] args) throws ActionException {
+        execAction(ActionRequest.createActionRequest(player, Objects.requireNonNull(args)));
     }
 
     @Override
-    public void execAction(Player player, String name, String[] args) throws ActionException {
-        Objects.requireNonNull(player);
-        execAction(ActionRequest.createActionRequest(player, name, args));
+    public void execAction(@Nullable Player player, @NotNull String name, @NotNull String[] args) throws ActionException {
+        execAction(ActionRequest.createActionRequest(player, Objects.requireNonNull(name), Objects.requireNonNull(args)));
     }
 
     @Override
-    public void execAction(ActionRequest request) throws ActionException {
+    public void execAction(@NotNull ActionRequest request) throws ActionException {
         String name = request.getAction().toLowerCase().replace(" ", "");
-        Player player = Objects.requireNonNull(request.getPlayer());
         Action action = getAction(name);
         if (action == null) throw new NoFoundActionException(name);
-        action.onAction(player, request.getArgs());
+        action.onAction(request.getPlayer(), request.getArgs());
     }
 }

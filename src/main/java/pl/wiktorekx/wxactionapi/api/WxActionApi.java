@@ -1,7 +1,11 @@
 package pl.wiktorekx.wxactionapi.api;
 
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import pl.wiktorekx.wxactionapi.api.exception.ActionException;
+
+import java.util.Objects;
 
 public class WxActionApi {
     private static ActionService actionService;
@@ -15,35 +19,37 @@ public class WxActionApi {
         WxActionApi.actionService = actionService;
     }
 
+    @NotNull
     public static ActionService getActionService() {
-        return actionService;
+        return Objects.requireNonNull(actionService);
     }
 
-    public static void registerAction(Action action) {
+    public static void registerAction(@NotNull Action action) {
         getActionService().registerAction(action);
     }
 
-    public static  void unregisterAction(String name) {
+    public static  void unregisterAction(@NotNull String name) {
         getActionService().unregisterAction(name);
     }
 
-    public static Action getAction(String name) {
+    @Nullable
+    public static Action getAction(@NotNull String name) {
         return getActionService().getAction(name);
     }
 
-    public static void execAction(Player player, String args) throws ActionException {
+    public static void execAction(@Nullable Player player, @NotNull String args) throws ActionException {
         getActionService().execAction(player, args);
     }
 
-    public static void execAction(Player player, String[] args) throws ActionException {
+    public static void execAction(@Nullable Player player, @NotNull String[] args) throws ActionException {
         getActionService().execAction(player, args);
     }
 
-    public static void execAction(Player player, String name, String[] args) throws ActionException {
+    public static void execAction(@Nullable Player player, @NotNull String name, @NotNull String[] args) throws ActionException {
         getActionService().execAction(player, name, args);
     }
 
-    public static void execAction(ActionRequest request) throws ActionException {
+    public static void execAction(@NotNull ActionRequest request) throws ActionException {
         getActionService().execAction(request);
     }
 }

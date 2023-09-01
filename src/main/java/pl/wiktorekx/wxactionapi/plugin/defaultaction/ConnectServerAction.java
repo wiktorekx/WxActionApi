@@ -5,6 +5,8 @@ import com.google.common.io.ByteStreams;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import pl.wiktorekx.wxactionapi.api.Action;
 
 public class ConnectServerAction implements Action {
@@ -17,12 +19,13 @@ public class ConnectServerAction implements Action {
     }
 
     @Override
+    @NotNull
     public String getName() {
         return "connectserver";
     }
 
     @Override
-    public void onAction(Player player, String[] args) {
+    public void onAction(@Nullable Player player, @NotNull String[] args) {
         if(args.length > 0) {
             @SuppressWarnings("UnstableApiUsage")
             ByteArrayDataOutput byteArrayDataOutput = ByteStreams.newDataOutput();

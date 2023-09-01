@@ -1,6 +1,8 @@
 package pl.wiktorekx.wxactionapi.plugin.defaultaction;
 
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import pl.wiktorekx.wxactionapi.api.Action;
 import pl.wiktorekx.wxactionapi.plugin.placeholder.PlaceholderService;
 import pl.wiktorekx.wxactionapi.plugin.utils.ChatUtils;
@@ -16,12 +18,13 @@ public class SendMessageAction implements Action {
     }
 
     @Override
+    @NotNull
     public String getName() {
         return "sendmessage";
     }
 
     @Override
-    public void onAction(Player player, String[] args) {
+    public void onAction(@Nullable Player player, @NotNull String[] args) {
         boolean newLine = false;
         if(args.length > 0) {
             String firstLine = args[0];

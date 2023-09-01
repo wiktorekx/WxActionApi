@@ -3,6 +3,8 @@ package pl.wiktorekx.wxactionapi.plugin.defaultaction;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import pl.wiktorekx.wxactionapi.api.Action;
 import pl.wiktorekx.wxactionapi.api.exception.ActionException;
 import pl.wiktorekx.wxactionapi.plugin.placeholder.PlaceholderService;
@@ -18,12 +20,13 @@ public class SendCommandAction implements Action {
     }
 
     @Override
+    @NotNull
     public String getName() {
         return "sendcommand";
     }
 
     @Override
-    public void onAction(Player player, String[] args) throws ActionException {
+    public void onAction(@Nullable Player player, @NotNull String[] args) throws ActionException {
         if(args.length > 1){
             String sender = args[0];
             CommandSender commandSender = player;

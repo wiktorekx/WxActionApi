@@ -1,6 +1,8 @@
 package pl.wiktorekx.wxactionapi.plugin.defaultaction;
 
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import pl.wiktorekx.wxactionapi.api.Action;
 import pl.wiktorekx.wxactionapi.api.ActionService;
 import pl.wiktorekx.wxactionapi.api.exception.ActionException;
@@ -16,12 +18,13 @@ public class ActionsAction implements Action {
     }
 
     @Override
+    @NotNull
     public String getName() {
         return "actions";
     }
 
     @Override
-    public void onAction(Player player, String[] args) throws ActionException {
+    public void onAction(@Nullable Player player, @NotNull String[] args) throws ActionException {
         List<String> currentAction = new ArrayList<>();
         for(String line : args) {
             String findLine = line.replace(" ", "");
