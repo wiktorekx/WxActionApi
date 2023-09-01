@@ -15,6 +15,7 @@ public class DefaultActionRegistry {
         actionService.registerAction(new ConnectServerAction(plugin));
         actionService.registerAction(new ActionsAction(actionService));
         actionService.registerAction(new PermissionAction(actionService));
+        actionService.registerAction(new ForOnlinePlayersAction(actionService));
         actionService.registerAction(new SendMessageAction(placeholderService));
         actionService.registerAction(new SendCommandAction(placeholderService));
         actionService.registerAction(new ThrowFireworkAction());
