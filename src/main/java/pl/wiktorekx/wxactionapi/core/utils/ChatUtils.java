@@ -1,4 +1,4 @@
-package pl.wiktorekx.wxactionapi.plugin.utils;
+package pl.wiktorekx.wxactionapi.core.utils;
 
 import org.bukkit.ChatColor;
 

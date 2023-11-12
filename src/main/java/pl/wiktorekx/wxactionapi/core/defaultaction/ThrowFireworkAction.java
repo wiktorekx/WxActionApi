@@ -1,4 +1,4 @@
-package pl.wiktorekx.wxactionapi.plugin.defaultaction;
+package pl.wiktorekx.wxactionapi.core.defaultaction;
 
 import org.bukkit.Color;
 import org.bukkit.FireworkEffect;

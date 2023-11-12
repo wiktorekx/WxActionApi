@@ -1,4 +1,4 @@
-package pl.wiktorekx.wxactionapi.plugin.defaultaction;
+package pl.wiktorekx.wxactionapi.core.defaultaction;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -6,8 +6,8 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import pl.wiktorekx.wxactionapi.api.Action;
 import pl.wiktorekx.wxactionapi.api.exception.ActionException;
-import pl.wiktorekx.wxactionapi.plugin.placeholder.PlaceholderService;
-import pl.wiktorekx.wxactionapi.plugin.utils.ChatUtils;
+import pl.wiktorekx.wxactionapi.core.placeholder.PlaceholderService;
+import pl.wiktorekx.wxactionapi.core.utils.ChatUtils;
 
 import java.util.Arrays;
 

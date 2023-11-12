@@ -1,4 +1,4 @@
-package pl.wiktorekx.wxactionapi.plugin.placeholder;
+package pl.wiktorekx.wxactionapi.core.placeholder;
 
 import org.bukkit.entity.Player;
 

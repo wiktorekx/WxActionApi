@@ -1,9 +1,9 @@
-package pl.wiktorekx.wxactionapi.plugin;
+package pl.wiktorekx.wxactionapi.core;
 
 import org.bukkit.plugin.Plugin;
 import pl.wiktorekx.wxactionapi.api.ActionService;
-import pl.wiktorekx.wxactionapi.plugin.defaultaction.*;
-import pl.wiktorekx.wxactionapi.plugin.placeholder.PlaceholderService;
+import pl.wiktorekx.wxactionapi.core.defaultaction.*;
+import pl.wiktorekx.wxactionapi.core.placeholder.PlaceholderService;
 
 public class DefaultActionRegistry {
 

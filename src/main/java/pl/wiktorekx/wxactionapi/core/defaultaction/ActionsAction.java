@@ -1,4 +1,4 @@
-package pl.wiktorekx.wxactionapi.plugin.defaultaction;
+package pl.wiktorekx.wxactionapi.core.defaultaction;
 
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
