@@ -1,44 +1,23 @@
 plugins {
     id 'java'
-    id 'maven-publish'
 }
 
-group = 'pl.wiktorekx'
-version = '1.0-SNAPSHOT'
+subprojects {
+    apply plugin: 'java'
 
-repositories {
-    mavenCentral()
-    maven { url = 'https://hub.spigotmc.org/nexus/content/repositories/snapshots/' }
-    maven { url = 'https://oss.sonatype.org/content/repositories/snapshots' }
-}
+    group = 'pl.wiktorekx'
+    version = '1.0-SNAPSHOT'
 
-
-dependencies {
-    implementation 'org.jetbrains:annotations:24.0.0'
-    compileOnly 'org.jetbrains:annotations:24.0.0'
-    compileOnly 'org.spigotmc:spigot-api:1.20.1-R0.1-SNAPSHOT'
-    testImplementation platform('org.junit:junit-bom:5.9.1')
-    testImplementation 'org.junit.jupiter:junit-jupiter'
-}
-
-publishing {
-    publications {
-        maven(MavenPublication) {
-            groupId = project.group
-            artifactId = project.name
-            version = project.version
-
-            from components.java
-        }
+    repositories {
+        mavenCentral()
+        maven { url = 'https://hub.spigotmc.org/nexus/content/repositories/snapshots/' }
+        maven { url = 'https://oss.sonatype.org/content/repositories/snapshots' }
     }
-}
 
-processResources {
-    filesMatching('plugin.yml') {
-        expand([name: rootProject.name, version: version])
+
+    dependencies {
+        compileOnly 'org.jetbrains:annotations:24.0.0'
+        compileOnly 'org.spigotmc:spigot-api:1.20.1-R0.1-SNAPSHOT'
     }
-}
 
-test {
-    useJUnitPlatform()
 }

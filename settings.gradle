@@ -1,2 +1,4 @@
 rootProject.name = 'WxActionApi'
+include 'Api'
+include 'Core'
 

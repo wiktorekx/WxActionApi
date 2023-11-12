@@ -1,0 +1,15 @@
+plugins {
+    id 'com.github.johnrengelman.shadow' version '8.1.1'
+}
+
+processResources {
+    filesMatching('plugin.yml') {
+        expand([name: rootProject.name, version: version])
+    }
+}
+
+dependencies {
+    implementation project(':Api')
+}
+
+tasks.build.dependsOn(tasks.shadowJar)

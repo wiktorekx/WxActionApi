@@ -1,0 +1,15 @@
+plugins {
+    id 'maven-publish'
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            groupId = project.group
+            artifactId = rootProject.name
+            version = project.version
+
+            from components.java
+        }
+    }
+}
