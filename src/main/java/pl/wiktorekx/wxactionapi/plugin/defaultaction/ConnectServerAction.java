@@ -1,7 +1,5 @@
 package pl.wiktorekx.wxactionapi.plugin.defaultaction;
 
-import com.google.common.io.ByteArrayDataOutput;
-import com.google.common.io.ByteStreams;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
@@ -10,8 +8,10 @@ import org.jetbrains.annotations.Nullable;
 import pl.wiktorekx.wxactionapi.api.Action;
 import pl.wiktorekx.wxactionapi.api.exception.ActionException;
 
-import java.io.*;
-import java.util.Objects;
+import java.io.ByteArrayOutputStream;
+import java.io.DataOutput;
+import java.io.DataOutputStream;
+import java.io.IOException;
 
 public class ConnectServerAction implements Action {
     private static final String BUNGEE_CORD_CHANNEL = "BungeeCord";
@@ -35,7 +35,7 @@ public class ConnectServerAction implements Action {
         try {
             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
             DataOutput dataOutput = new DataOutputStream(byteArrayOutputStream);
-            dataOutput.writeUTF("connect");
+            dataOutput.writeUTF("Connect");
             dataOutput.writeUTF(args[0]);
             player.sendPluginMessage(plugin, BUNGEE_CORD_CHANNEL, byteArrayOutputStream.toByteArray());
         } catch (IOException e){
