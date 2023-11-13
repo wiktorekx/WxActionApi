@@ -8,6 +8,6 @@ repositories {
 }
 
 dependencies {
-  compileOnly 'com.github.wiktorekx:WxActionApi:1.0-SNAPSHOT'
+  compileOnly 'com.github.wiktorekx:WxActionApi:1.1-SNAPSHOT'
 }
 ```
