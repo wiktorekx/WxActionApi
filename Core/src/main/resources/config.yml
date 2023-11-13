@@ -1,0 +1,3 @@
+action-commands:
+  example: sendmessage example message
+  firework: throwfirework
